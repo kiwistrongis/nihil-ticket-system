@@ -7,7 +7,8 @@ import java.util.zip.DataFormatException;
 //local imports
 import assets.*;
 
-/** @class Sell
+/** 
+ * @class Sell
  * @brief Represents a 'sell' transaction.
  **/
 public class Sell extends Transaction {
