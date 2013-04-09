@@ -3,8 +3,10 @@ package transaction;
 //library imports
 import java.util.Vector;
 import java.util.zip.DataFormatException;
+
 //local imports
 import assets.*;
+import java.util.regex.*;
 
 /** 
  * @class Sell
@@ -37,7 +39,7 @@ public class Sell extends Transaction {
 			throw new DataFormatException("Sell: string s is of an incorrect size");
 		
 		//Get eventName of tickets being sold
-		this.eventName  = s.substring(0, eventName_size-1).trim();
+		this.eventName  = s.substring(0, Ticket.eventName_size-1).trim();
 		for(int i = 0;  i<this.eventName.length();  i++)
 		{
 			try{
@@ -48,20 +50,20 @@ public class Sell extends Transaction {
 		}
 			
 		//Get username of seller (selling these tickets)
-		this.seller     = s.substring(eventName_size+1, eventName_size+1 + username_size-1).trim();
+		this.seller     = s.substring(Ticket.eventName_size+1, Ticket.eventName_size+1 + Account.username_size-1).trim();
 		
 		try {
-			this.numTickets = Integer.parseInt( s.substring( eventName_size+1 + username_size + 1, eventName_size+1 + username_size + 1 + 2) );
-		} catch {
-			throw			
+			this.numTickets = Integer.parseInt( s.substring( Ticket.eventName_size+1 + Account.username_size + 1, Ticket.eventName_size+1 + Account.username_size + 1 + 2) );
+		} catch(NumberFormatException e) {
+					
 		}
 		
 		
 		//extract integer portion of ticket price  (in hundreds of cents)
-		this.ticketPrice = 100* Integer.parseInt( s.substring( eventName_size+1 + username_size + 1 + 3 + 1, eventName_size+1 + username_size + 1 + 3 + 1 + 2 ) );   
+		this.ticketPrice = 100* Integer.parseInt( s.substring( Ticket.eventName_size+1 + Account.username_size + 1 + 3 + 1, Ticket.eventName_size+1 + Account.username_size + 1 + 3 + 1 + 2 ) );   
 		
 		//now extract decimal portion adding it to ticket price (# of cents)
-		this.ticketPrice += Integer.parseInt( s.substring( eventName_size+1 + username_size + 1 + 3 + 1, eventName_size+1 + username_size + 1 + 3 + 1 + 2 ) );
+		this.ticketPrice += Integer.parseInt( s.substring( Ticket.eventName_size+1 + Account.username_size + 1 + 3 + 1, Ticket.eventName_size+1 + Account.username_size + 1 + 3 + 1 + 2 ) );
 
 		//validate all fields
 	}
