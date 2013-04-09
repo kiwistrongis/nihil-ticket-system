@@ -12,13 +12,12 @@ import assets.*;
  * @brief Represents a 'sell' transaction.
  **/
 public class Sell extends Transaction {
+	
 	//static field that identifies the transaction to the server
 	public static final int code = 4;
 
-	public static final int eventName_size = 19;
 	public static final int quantity_size  =  3;
 	public static final int price_size     =  6;
-	public static final int username_size  = 15;
 	
 	//Sell Transaction Parameters
 	public String eventName;	//eventname of which the tickets are being sold to
@@ -34,11 +33,30 @@ public class Sell extends Transaction {
 		//read remaining portion of line from merged dtf, extracting the necesary parameters
 		//of this sell transact
 		
+		//Ensure s is of the correct length
+		if( s.length() != Ticket.eventName_size + 1 + Account.username_size + 1 + quantity_size + 1 + price_size )
+			throw new DataFormatException("Sell: string s is of an incorrect size");
+		
+		//Get eventName of tickets being sold
 		this.eventName  = s.substring(0, eventName_size-1).trim();
+		for(int i = 0;  i<this.eventName.length();  i++)
+		{
+			try{
+				if( !this.eventName.substring(i,1).matches("[a-zA-Z0-9_]+") ) throw new DataFormatException("Sell: Invalid eventname formate"); 
+			} catch(PatternSyntaxException e) {
+				System.out.println(" Sell: eventname regular expression is invalid");				
+			}
+		}
+			
+		//Get username of seller (selling these tickets)
+		this.seller     = s.substring(eventName_size+1, eventName_size+1 + username_size-1).trim();
 		
-		this.seller     = s.substring(eventName_size+1, eventName_size+1 + username_size-1);
+		try {
+			this.numTickets = Integer.parseInt( s.substring( eventName_size+1 + username_size + 1, eventName_size+1 + username_size + 1 + 2) );
+		} catch {
+			throw			
+		}
 		
-		this.numTickets = Integer.parseInt( s.substring( eventName_size+1 + username_size + 1, eventName_size+1 + username_size + 1 + 2) );
 		
 		//extract integer portion of ticket price  (in hundreds of cents)
 		this.ticketPrice = 100* Integer.parseInt( s.substring( eventName_size+1 + username_size + 1 + 3 + 1, eventName_size+1 + username_size + 1 + 3 + 1 + 2 ) );   

@@ -58,8 +58,9 @@ public class Buy extends Transaction {
 		//if 0 tickets available or not enough tickets to the seller/eventname, purchase can not be conducted
 		if( MaxTickets == 0 || this.numTickets > MaxTickets ) 
 			throw new TransactionException(); //"Insufficient tickets are available to the specified event, from the specified seller."
+		gh cred
 		
-		//Check if this user has enough credit to purchase the tickets
+		
 		
 	}
 
