@@ -34,9 +34,6 @@ public class Sell extends Transaction {
 		//read remaining portion of line from merged dtf, extracting the necesary parameters
 		//of this sell transact
 
-		System.out.println();
-		System.out.println(Line);
-		
 		//Ensure s is of the correct length
 		if( Line.length() != Ticket.eventName_size + 1 + Account.username_size + 1 + quantity_size + 1 + price_size )
 			throw new DataFormatException("Sell: string s is of an incorrect size");
@@ -75,7 +72,7 @@ public class Sell extends Transaction {
 		} catch(NumberFormatException e) {
 			throw new DataFormatException("Sell: Invalid format of ticket price");
 		}
-		if( TicketPrice < 0 || TicketPrice > 999.99 ) throw new DataFormatException("Sell: Ticketprice must be between 0 and 999.99");
+		if( ticketPrice < 0 || ticketPrice > 99999 ) throw new DataFormatException("Sell: Ticketprice must be between 0 and 999.99");
 		
 		
 	}

@@ -18,13 +18,11 @@ public class TestSell {
 	public void testSellConstructor_Valid() throws DataFormatException {
 		Sell TestSell = new Sell("EventName1222223333 UserName1122222 001 102.99");
 	}
-	
-	/*
+		
 	@Test(expected = DataFormatException.class)
-	public void testSellConstructor_Valid() throws DataFormatException {
-		Sell TestSell = new Sell("EventName1222223333 UserName1122222 001 102.99");
+	public void testSellConstructor_InvalidEventNameCharacters() throws DataFormatException {
+		Sell TestSell = new Sell("EventN*me1222223333 UserName1122222 001 102.99");
 	}	
-	
-	*/
+
 	
 }
