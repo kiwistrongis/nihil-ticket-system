@@ -86,6 +86,10 @@ public class Buy extends Transaction {
 		if( MaxTickets == 0 || this.numTickets > MaxTickets ) 
 			throw new TransactionException(); //"Insufficient tickets are available to the specified event, from the specified seller."
 		
+		//Update vector removing purchased tickets
+		tickets.get(MaxTickets_TicketIndex).quantity -= this.numTickets;
+
+		//Important Note: the user's credit will be dedcucted by the immediately following refund transaction
 	}
 
 
