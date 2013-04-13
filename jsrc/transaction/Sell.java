@@ -86,13 +86,16 @@ public class Sell extends Transaction {
 	 *                  tickets being sold from various sellers.
 	 */
 	public void applyTo(Vector<Account> accounts, Vector<Ticket> tickets) throws TransactionException {
-		
-		//TO DO   LOTS OF ERROR CHECKING
+
+		//Ensure seller exists
+		boolean SellerFound = false;
+		for(int i = 0;  i<accounts.size();  i++)
+			if( accounts.get(i).username.equals( this.seller ) ) SellerFound = true;
+		if( !SellerFound ) throw new TransactionException();
 		
 		//Create a new ticket object representing the tickets to be sold, with the parameters set up
 		//during the constructor, then add this ticket object to the vector of tickets.
 		tickets.add( new Ticket( this.eventName, this.seller, this.quantity_size, this.ticketPrice));
-		
 		
 	}
 
