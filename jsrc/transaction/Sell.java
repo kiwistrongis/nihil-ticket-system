@@ -3,10 +3,11 @@ package transaction;
 //library imports
 import java.util.Vector;
 import java.util.zip.DataFormatException;
+import java.util.regex.*;
 
 //local imports
 import assets.*;
-import java.util.regex.*;
+
 
 /** 
  * @class Sell
