@@ -1,0 +1,56 @@
+package jsrc;
+
+import transaction.*;
+import java.util.zip.DataFormatException;
+import java.util.Vector;
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+import org.junit.Ignore;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
+
+@RunWith(JUnit4.class)
+public class TestAddCredit{
+
+	//Tests constructors ability to identify a valid input
+	@Test
+	public void testAddCreditConstruct_Valid() throws DataFormatException{
+		AddCredit TestAddCredit = new AddCredit("UserName1122222 FS 000100.00");
+	}
+	//Test constructors ability to indentify an invalid usename
+	@Test
+	public void testAddCreditConstruct_InvalidUseName{
+		AddCredit TestAddCredit = new AddCredit("UserNa&e1122222 FS 000100.00");
+	}
+	//Tests constructors ability to catch an invalid usertype
+	@Test
+	public void testAddCreditConstruct_InvalidUseType{
+		AddCredit TestAddCredit = new AddCredit("UserName1122222 RS 000100.00");
+	}
+	//Tests constructors ability to catch an invalid credit value
+	@Test
+	public void testAddCreditConstruct_InvalidCreditValue{
+		AddCredit TestAddCredit = new AddCredit("UserName1122222 FS 0001k0.00");
+	}
+	//Tests constructors ability to prevent overcrediting per session
+	@Test
+	public void testAddCreditConstruct_InvalidCreditAmounnt{
+		AddCredit TestAddCredit = new AddCredit("UserName1122222 FS 010000.00");
+	}
+	//Tests constructors ability to reject incorrect string formats
+	@Test
+	public void testAddCreditConstruct_InvalidCharStream{
+		AddCredit TestAddCredit = new AddCredit("UserName11222227 RSW 000100.000");
+	}
+	//Tests constructors ability to reject zero addition
+	@Test
+	public void testAddCreditConstruct_ZeroValue{
+		AddCredit TestAddCredit = new AddCredit("UserName11222227 FS 000000.00");
+	}
+	//Tests constructors ability to catch decimal values
+	@Test
+	public void testAddCreditConstruct_DecimalInserted{
+		AddCredit TestAddCredit = new AddCredit("UserName1122222 FS 000100.99");
+	}
+}
