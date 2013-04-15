@@ -67,29 +67,27 @@ public class Buy extends Transaction {
 	/**
 	 * Applies this buy transaction, updating the given vectors of accounts and available tickets 
 	 * accordingly.
+    *
+	 * Important Note: the user's credit will be deducted by the immediately following refund transaction
 	 */
 	public void applyTo(Vector<Account> accounts, Vector<Ticket> tickets)
 			throws TransactionException {	
-		//Search the Vector of tickets for a ticket(s) with the specified seller and event,
-		//take note of the maximum quantity of tickets available from the seller to the event
-		int MaxTickets = 0;
-		int MaxTickets_TicketIndex = 0; //index into tickets,of ticket with this largest quantity
+
+		//Find a ticket object in the vector of tickets with enough 
+		//tickets to the specified event from the required seller
 		for(int i = 0;  i<tickets.size();  i++)
-			if( tickets.get(i).username.equals(this.seller) && tickets.get(i).eventName.equals(this.eventName) ) {
-				if( tickets.get(i).quantity > MaxTickets ) {
-					MaxTickets = tickets.get(i).quantity;
-					MaxTickets_TicketIndex = i;					
-				}
+			if(   tickets.get(i).username.equals(this.seller) 
+            && tickets.get(i).eventName.equals(this.eventName) 
+            && tickets.get(i).quantity >= this.NumTickets      ) {
+
+				//This ticket (ticket i) has enought of the desired tickets
+				//Update vector, removing purchased tickets
+				tickets.get(MaxTickets_TicketIndex).quantity -= this.numTickets; 
+				return;
 			}
 		
-		//if 0 tickets available or not enough tickets to the seller/eventname, purchase can not be conducted
-		if( MaxTickets == 0 || this.numTickets > MaxTickets ) 
-			throw new TransactionException(); //"Insufficient tickets are available to the specified event, from the specified seller."
-		
-		//Update vector removing purchased tickets
-		tickets.get(MaxTickets_TicketIndex).quantity -= this.numTickets;
-
-		//Important Note: the user's credit will be deducted by the immediately following refund transaction
+		//If control flow reaches here, no ticket object with the required tickets was found
+		throw new TransactionException();
 	}
 
 
