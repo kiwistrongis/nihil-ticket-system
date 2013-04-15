@@ -1,3 +1,4 @@
+
 package tests;
 
 import assets.*;
@@ -103,9 +104,4 @@ public class TestSell {
 
 		TestSell.applyTo( TestAccounts, TestTickets );
 	}	
-	
-	
 }
-
-
-

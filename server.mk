@@ -24,7 +24,7 @@ server-tests: \
 	bin/tests/TestDelete.class \
 	bin/tests/TestRefund.class \
 	bin/tests/TestSell.class
-server-test-all:
+server-test-all: \
 	server-test-account \
 	server-test-account2 \
 	server-test-ticket \

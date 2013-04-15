@@ -1,4 +1,3 @@
-
 package tests;
 
 import assets.*;
@@ -121,5 +120,3 @@ public class TestBuy {
 		b.applyTo( TestAccounts, TestTickets );		
 	}
 }
-
-

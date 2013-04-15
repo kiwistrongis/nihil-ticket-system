@@ -74,7 +74,7 @@ public class Buy extends Transaction {
 
 		//Find a ticket object in the vector of tickets with enough 
 		//tickets to the specified event from the required seller
-		for(int i = 0;  i<tickets.size();  i++)
+		for(int i = 0;  i<tickets.size();  i++){
 			Ticket current = tickets.get(i);
 			//This ticket (ticket i) has enough of the desired tickets
 			if(current.username.equals(this.seller) 
@@ -84,7 +84,7 @@ public class Buy extends Transaction {
 				tickets.get(i).quantity -= this.numTickets; 
 				return;
 			}
-		
+		}
 		//If control flow reaches here, no ticket object with the required tickets was found
 		throw new TransactionException("No Matching ticket with enough tickets for sale was found");
 	}
