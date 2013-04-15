@@ -85,7 +85,41 @@ public class TestBuy {
 
 		b.applyTo( TestAccounts, TestTickets );		
 	}
+
+	//Test 10:  Tests applyTo method, enforcing the for loop is executed twice
+	@Test 
+	public void testApplyTo_ForLoopIterateTwice() throws DataFormatException, TransactionException {
+		Vector<Account> TestAccounts = new Vector<Account>();
+		Vector<Ticket>  TestTickets  = new Vector<Ticket>();
+		
+		TestTickets.add( new Ticket("WrongEvent", "BestSeller", 2, 100) );
+		TestTickets.add( new Ticket("TheEvent", "BestSeller", 2, 100)   );
+
+		Buy b = new Buy("TheEvent            BestSeller      001 102.99");
+
+		//Note: TestTickets intentionally does not have a ticket with the specified seller/eventname
+
+		b.applyTo( TestAccounts, TestTickets );		
+	}
+
+	//Test 11:  Tests applyTo method, enforcing the for loop is executed five times (MANY)
+	@Test 
+	public void testApplyTo_ForLoopIterateMany() throws DataFormatException, TransactionException {
+		Vector<Account> TestAccounts = new Vector<Account>();
+		Vector<Ticket>  TestTickets  = new Vector<Ticket>();
+
+		TestTickets.add( new Ticket("WrongEvent1", "BestSeller", 2, 100) );
+		TestTickets.add( new Ticket("WrongEvent2", "BestSeller", 2, 100) );
+		TestTickets.add( new Ticket("WrongEvent3", "BestSeller", 2, 100) );
+		TestTickets.add( new Ticket("WrongEvent4", "BestSeller", 2, 100) );
+		TestTickets.add( new Ticket("TheEvent",    "BestSeller", 2, 100) );	
 	
+		Buy b = new Buy("TheEvent            BestSeller      001 102.99");
+
+		//Note: TestTickets intentionally does not have a ticket with the specified seller/eventname
+
+		b.applyTo( TestAccounts, TestTickets );		
+	}
 }
 
 
