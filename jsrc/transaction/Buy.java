@@ -52,7 +52,7 @@ public class Buy extends Transaction {
 				if( tickets.get(i).quantity > MaxTickets )
 				{
 					MaxTickets = tickets.get(i).quantity;
-					MaxTickets_TicketIndex = i;					
+					MaxTickets_TicketIndex = i;
 				}
 			}
 		
