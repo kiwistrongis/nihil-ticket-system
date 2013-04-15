@@ -74,9 +74,9 @@ public class Ticket {
 	public Ticket(String eventName, String username, int quantity, int price)
 	{
 		this.eventName = eventName;
-		this.username = username;
-		this.quantity = quantity;
-		this.price = price;
+		this.username  = username;
+		this.quantity  = quantity;
+		this.price     = price;
 	}
 	
 	
@@ -96,3 +96,6 @@ public class Ticket {
 			this.username.equals( other.username);
 	}
 }
+
+
+
