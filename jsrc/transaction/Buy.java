@@ -78,7 +78,7 @@ public class Buy extends Transaction {
 		for(int i = 0;  i<tickets.size();  i++)
 			if(   tickets.get(i).username.equals(this.seller) 
             && tickets.get(i).eventName.equals(this.eventName) 
-            && tickets.get(i).quantity >= this.NumTickets      ) {
+            && tickets.get(i).quantity >= this.numTickets      ) {
 
 				//This ticket (ticket i) has enought of the desired tickets
 				//Update vector, removing purchased tickets
