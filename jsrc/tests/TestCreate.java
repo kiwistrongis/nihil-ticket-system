@@ -1,18 +1,17 @@
-
 package tests;
 
+//local imports
 import assets.*;
 import transaction.*;
-
+//library imports
 import java.util.Vector;
 import java.util.zip.DataFormatException;
-
-import org.junit.Test;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.junit.Test;
 import static org.junit.Assert.assertEquals;
-import org.junit.BeforeClass;
-import org.junit.AfterClass;
 
 /**
  * This TestCreate class is a JUnit testing class that exercises the constructor and different class associated methods to test 

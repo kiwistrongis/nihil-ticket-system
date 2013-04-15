@@ -1,12 +1,14 @@
 package tests;
 
-
+//local imports
+import assets.*;
+import transaction.*;
 //library imports
 import java.util.zip.DataFormatException;
-import org.junit.Test;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(JUnit4.class)

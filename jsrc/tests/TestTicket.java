@@ -1,16 +1,16 @@
-
 package tests;
 
+//local imports
 import assets.*;
-import transaction.*;
-import java.util.zip.DataFormatException;
+//library imports
 import java.util.Vector;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+import java.util.zip.DataFormatException;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(JUnit4.class)
 public class TestTicket {
