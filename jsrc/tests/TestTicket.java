@@ -6,7 +6,7 @@ import transaction.*;
 import java.util.zip.DataFormatException;
 import java.util.Vector;
 import static org.junit.Assert.assertEquals;
-
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
@@ -31,9 +31,36 @@ public class TestTicket {
 		Ticket t = new Ticket("IncorrectLengthOfThisLIne");
 	}
 
+	//Test 3: Tests the other constructor which is designed to construct a ticket of the specified parameters,
+   // (all parameters will be verified for integrity before callling this constructor)
+	@Test
+	public void testTicket2() {
+		Ticket t = new Ticket("MyEvent", "UserA", 100, 1000);
+		assertTrue( t.eventName.equals("MyEvent") );
+		assertTrue( t.username.equals("UserA") );
+		assertTrue( t.quantity == 100 );
+		assertTrue( t.price == 1000 );
+	}
+
+	//Test 4: Tests the toString Method
+	@Test
+	public void testToString() {
+		Ticket t = new Ticket("EventName          ", "TheUsername1122", 130, 8920);
+		assertTrue( t.toString().equals("EventName           TheUsername1122 130 089.20") );
+	}
+
+	//Test 5: Tests equals method, to check if two ticket objects have the same eventname and seller
+	@Test
+	public void testEquals() {
+		Ticket t1 = new Ticket("GrandEvent", "Seller1", 100, 1000);
+		Ticket t2 = new Ticket("GrandEvent", "Seller1", 101,  999);
+		
+		assertTrue( t1.equals( t2 ) );
+	}
 	
 
-
-
-
 }
+
+
+
+
