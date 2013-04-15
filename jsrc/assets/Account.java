@@ -39,7 +39,7 @@ public class Account {
 
 		int currIndex = 0;
 		
-		this.username = line.substring(currIndex, currIndex + username_size);
+		this.username = line.substring(currIndex, currIndex + username_size).trim();
 		currIndex += username_size + 1;
 
 		String typeString = line.substring(
@@ -106,12 +106,14 @@ public class Account {
 				break;
 		}
 		return String.format(
-			"%"+username_size+"s %"+type_size+"s %0"+dollars_size+"d.%0"+cents_size+"d",
+			"%-"+username_size+"s %"+type_size+"s %0"+dollars_size+"d.%0"+cents_size+"d",
 			username, typeString, credit/100, credit%100);
 	}
 
-	public boolean equals( Account other){
-		return this.username.equals( other.username);
+	public boolean equals( Object other){
+		return other instanceof Account ?
+			this.username.equals( ((Account)other).username) :
+			false;
 	}
 	public static int maxCredit(){
 		return (int) Math.pow(10, dollars_size + cents_size) - 1;

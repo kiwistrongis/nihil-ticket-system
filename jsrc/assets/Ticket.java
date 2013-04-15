@@ -40,11 +40,11 @@ public class Ticket {
 		
 		int currIndex = 0;
 		this.eventName = line.substring(
-			currIndex, currIndex + eventName_size);
+			currIndex, currIndex + eventName_size).trim();
 		currIndex += eventName_size + token_size;
 		
 		this.username = line.substring(
-			currIndex, currIndex + username_size);
+			currIndex, currIndex + username_size).trim();
 		currIndex += username_size + token_size;
 		
 		this.quantity = Integer.parseInt( line.substring(
@@ -85,15 +85,16 @@ public class Ticket {
 	 **/
 	public String toString(){
 		return String.format(
-			"%"+eventName_size+"s %"+username_size+"s %0"+
+			"%-"+eventName_size+"s %-"+username_size+"s %0"+
 				quantity_size+"d %0"+dollars_size+"d.%0"+cents_size+"d",
 			eventName, username, quantity, price/100, price%100);
 	}
 
-	public boolean equals( Ticket other){
-		return
-			this.eventName.equals( other.eventName) &&
-			this.username.equals( other.username);
+	public boolean equals( Object other){
+		return other instanceof Ticket ?
+			this.eventName.equals( ((Ticket)other).eventName) &&
+			this.username.equals( ((Ticket)other).username) :
+			false;
 	}
 }
 

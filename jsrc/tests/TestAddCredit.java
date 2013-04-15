@@ -1,4 +1,4 @@
-package jsrc;
+package tests;
 
 //local imports
 import assets.*;
