@@ -31,9 +31,7 @@ public class Create extends Transaction {
 		//extract
 		this.username = line.substring( i, Account.username_size).trim();
 		//validate
-		if( ! this.username.matches(""))
-			throw new DataFormatException("Invalid username field");
-		if( this.username.matches("([A-Za-z0-9_]+)")==false)
+		if( !this.username.matches("[A-Za-z0-9_]+"))
 			throw new DataFormatException("Invalid username field");
 		if (this.username.trim().length() <= 0)
 			throw new DataFormatException("Username field too small");
@@ -55,12 +53,14 @@ public class Create extends Transaction {
 		//validate
 		else
 			throw new DataFormatException("Invalid type field");
+		i += Account.type_size + Account.token_size;
 
 		//extract dollars
 		String dollars = line.substring( i, i + Account.dollars_size);
 		i += Account.dollars_size + 1;
 		//extract cents
 		String cents = line.substring( i, i + Account.cents_size);
+		System.out.println(dollars + "," + cents + "}");
 		try{
 			this.credit =
 					Integer.parseInt( dollars)*100 +
@@ -83,7 +83,7 @@ public class Create extends Transaction {
 			throws TransactionException{
 		
 		//Username field validation
-		if( this.username.matches("([A-Za-z0-9_]+)")==false)
+		if( !this.username.matches("[A-Za-z0-9_]+"))
 			throw new TransactionException("Invalid username field");
 		//if(( 0 <= this.username.trim().length() && this.username.trim().length() <= Account.username_size)==false)
 		if (this.username.trim().length() <= 0)

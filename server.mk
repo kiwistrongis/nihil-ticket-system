@@ -140,6 +140,8 @@ bin/tests/TestBuy.class: jsrc/tests/TestBuy.java \
 
 server-test-create: bin/tests/TestCreate.class
 	-java $(cp) org.junit.runner.JUnitCore tests.TestCreate
+server-test-create2: bin/tests/TestCreate.class
+	java $(cp) tests.TestCreate
 bin/tests/TestCreate.class: jsrc/tests/TestCreate.java \
 		bin/transaction/Create.class
 	javac $(cp) $(dest) jsrc/tests/TestCreate.java

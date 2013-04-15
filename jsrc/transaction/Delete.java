@@ -30,7 +30,7 @@ public class Delete extends Transaction {
 		//validate
 		if( ! this.username.matches(""))
 			throw new DataFormatException("Invalid username field");
-		if( this.username.matches("([A-Za-z0-9_]+)")==false)
+		if( this.username.matches("([A-Za-z0-9 ]+)")==false)
 			throw new DataFormatException("Invalid username field");
 		if (this.username.trim().length() <= 0)
 			throw new DataFormatException("Username field too small");
@@ -52,6 +52,7 @@ public class Delete extends Transaction {
 		//validate
 		else
 			throw new DataFormatException("Invalid type field");
+		i += Account.type_size + Account.token_size;
 
 		//extract dollars
 		String dollars = line.substring( i, i + Account.dollars_size);
@@ -80,7 +81,7 @@ public class Delete extends Transaction {
 			throws TransactionException{
 		
 		//Username field validation
-		if( this.username.matches("([A-Za-z0-9_]+)")==false)
+		if( this.username.matches("([A-Za-z0-9 ]+)")==false)
 			throw new TransactionException("Invalid username field");
 		//if(( 0 <= this.username.trim().length() && this.username.trim().length() <= Account.username_size)==false)
 		if (this.username.trim().length() <= 0)

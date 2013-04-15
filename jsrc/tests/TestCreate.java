@@ -21,6 +21,15 @@ import static org.junit.Assert.assertEquals;
 @RunWith(JUnit4.class)
 public class TestCreate {
 
+	public static void main( String[] args){
+		try{
+			String line = "manager         AA 001000.00";
+			Create test = new Create( line);}
+		catch( DataFormatException e){
+			System.out.println(e);}
+	}
+
+
 	@BeforeClass
 	public static void testSetup() {
 	}
@@ -38,9 +47,11 @@ public class TestCreate {
 	@Test 
 	public void testCreate() throws DataFormatException {
 		System.out.println("CreateTest 1: Test if a Create transaction object is constructed correctly with valid data...");
-		String line = "manager         AA 001000.00";				
-		Create TestCreate = new Create( line);
-		assertEquals( line, TestCreate.toString());
+		String line = "manager         AA 001000.00";
+		Create test = new Create( line);
+		assertEquals( "manager", test.username);
+		assertEquals( Account.Admin, test.type);
+		assertEquals( 100000, test.credit);
 	}
 
 	/**
@@ -53,7 +64,7 @@ public class TestCreate {
 	public void testCreate_InvalidLine() throws DataFormatException {
 		System.out.println("CreateTest 2: Tests if constructor rejects catches invalid DTF lines of incorrect sizes...");
 		String line = "invalid DTF line"; 
-		Create TestCreate = new Create( line);
+		Create test = new Create( line);
 	}
 
 	/**
@@ -65,7 +76,7 @@ public class TestCreate {
 	public void testCreate_InvalidUsername() throws DataFormatException {
 		System.out.println("CreateTest 3: Test if a Create transaction catches invalid username field values, rejects object construction...");
 		String line = "m@nag&r         AA 001000.00";
-		Create TestCreate = new Create( line);
+		Create test = new Create( line);
 	}
 
 	/**
@@ -77,7 +88,7 @@ public class TestCreate {
 	public void testCreate_UsernameTooLarge() throws DataFormatException {
 		System.out.println("CreateTest 4: Test if a Create transaction rejects object construction if username is too large...");
 		String line = "username1111222344455555longggggg         AA 001000.00";
-		Create TestCreate = new Create( line);
+		Create test = new Create( line);
 	}
 
 	/**
@@ -89,7 +100,7 @@ public class TestCreate {
 	public void testCreate_InvalidUserType() throws DataFormatException {
 		System.out.println("CreateTest 5: Test if a Create transaction rejects object construction of invalid usertype field values...");
 		String line = "manager         ZZ 001000.00";
-		Create TestCreate = new Create( line);
+		Create test = new Create( line);
 	}
 
 	/**
@@ -101,7 +112,7 @@ public class TestCreate {
 	public void testCreate_InvalidCredit() throws DataFormatException {
 		System.out.println("CreateTest 6: Test if a Create transaction rejects object construction if credit amount has invalid characters (not numeric)...");
 		String line = "manager         AA invalid(.0";
-		Create TestCreate = new Create( line);
+		Create test = new Create( line);
 	}
 
 	/**
@@ -113,7 +124,7 @@ public class TestCreate {
 	public void testCreate_InvalidCreditDecimal() throws DataFormatException {
 		System.out.println("CreateTest 7: Tests constructor's ability to catch credit amount values in DTFLine that have two or more invalid decimal places...");
 		String line = "manager         AA 00.10.00.00";
-		Create TestCreate = new Create( line);
+		Create test = new Create( line);
 	}
 
 	/**
@@ -124,8 +135,8 @@ public class TestCreate {
 	@Test (expected = DataFormatException.class)
 	public void testCreate_NegativeInvalidCredit() throws DataFormatException {
 		System.out.println("CreateTest 8: Tests constructor's ability to catch and reject credit amount values less than zero or have invalid (minus,-) characters...");
-		String line = "manager         AA -99.99";
-		Create TestCreate = new Create( line);
+		String line = "manager         AA -00099.99";
+		Create test = new Create( line);
 	}
 
 	/**
@@ -137,7 +148,7 @@ public class TestCreate {
 	public void testCreate_CreditTooLarge() throws DataFormatException {
 		System.out.println("CreateTest 9: Tests constructor's ability to catch credit amount values that are exceed the maximum size limit...");
 		String line = "manager         AA 9999999.99";
-		Create TestCreate = new Create( line);
+		Create test = new Create( line);
 	}
 
 	/**
@@ -152,9 +163,9 @@ public class TestCreate {
 		Vector<Ticket> TestTickets = new Vector<Ticket>();
 
 		System.out.println("CreateTest 10: Test if a Create transaction is applied correctly with a valid user account entry...");
-		Create TestCreate = new Create("newuser         SS 000500.00");
+		Create test = new Create("newuser         SS 000500.00");
 		//TestAccounts will be empty, thus a new account 'newuser' can be created
-		TestCreate.applyTo(TestAccounts, TestTickets);
+		test.applyTo(TestAccounts, TestTickets);
 	}
 
 	/**
@@ -174,7 +185,7 @@ public class TestCreate {
 		TestAccounts.add(new Account( "newuser", Account.Sell, 500));
 		
 		//TestAccounts has newuser account, but Create transaction is trying to create a duplicate newuser
-		Create TestCreate = new Create("newuser         SS 000500.00");
-		TestCreate.applyTo(TestAccounts, TestTickets);
+		Create test = new Create("newuser         SS 000500.00");
+		test.applyTo(TestAccounts, TestTickets);
 	}
 }

@@ -39,8 +39,10 @@ public class TestDelete {
 	public void testDelete() throws DataFormatException {
 		System.out.println("DeleteTest 1: Test if a Delete transaction object is constructed correctly with valid data...");
 		String line = "manager         AA 001000.00";				
-		Delete TestDelete = new Delete( line);
-		assertEquals( line, TestDelete.toString());
+		Delete test = new Delete( line);
+		assertEquals( "manager", test.username);
+		assertEquals( Account.Admin, test.type);
+		assertEquals( 100000, test.credit);
 	}
 
 	/**
@@ -53,7 +55,7 @@ public class TestDelete {
 	public void testDelete_InvalidLine() throws DataFormatException {
 		System.out.println("DeleteTest 2: Tests if constructor rejects catches invalid DTF lines of incorrect sizes...");
 		String line = "invalid DTF line"; 
-		Delete TestDelete = new Delete( line);
+		Delete test = new Delete( line);
 	}
 
 	/**
@@ -65,7 +67,7 @@ public class TestDelete {
 	public void testDelete_InvalidUsername() throws DataFormatException {
 		System.out.println("DeleteTest 3: Test if a Delete transaction rejects object construction of invalid username field values...");
 		String line = "m@nag&r         AA 001000.00";
-		Delete TestDelete = new Delete( line);
+		Delete test = new Delete( line);
 	}
 
 	/**
@@ -77,7 +79,7 @@ public class TestDelete {
 	public void testDelete_UsernameTooLarge() throws DataFormatException {
 		System.out.println("DeleteTest 4: Test if a Delete transaction rejects object construction if username is too large (username exceeds 15 character size limit)...");
 		String line = "username1111222344455555longggggg         AA 001000.00";
-		Delete TestDelete = new Delete( line);
+		Delete test = new Delete( line);
 	}
 
 	/**
@@ -89,7 +91,7 @@ public class TestDelete {
 	public void testDelete_InvalidUserType() throws DataFormatException {
 		System.out.println("DeleteTest 5: Test if a Delete transaction rejects object construction of invalid usertype field values...");
 		String line = "manager         ZZ 001000.00";
-		Delete TestDelete = new Delete( line);
+		Delete test = new Delete( line);
 	}
 
 	/**
@@ -101,7 +103,7 @@ public class TestDelete {
 	public void testDelete_InvalidCredit() throws DataFormatException {
 		System.out.println("DeleteTest 6: Test if a Delete transaction rejects object construction if credit amount has invalid characters (not numeric)...");
 		String line = "manager         AA invalid(.0";
-		Delete TestDelete = new Delete( line);
+		Delete test = new Delete( line);
 	}
 
 	/**
@@ -113,7 +115,7 @@ public class TestDelete {
 	public void testDelete_InvalidCreditDecimal() throws DataFormatException {
 		System.out.println("DeleteTest 7: Tests constructor's ability to catch credit amount values in DTFLine that have two or more invalid decimal places...");
 		String line = "manager         AA 00.10.00.00";
-		Delete TestDelete = new Delete( line);
+		Delete test = new Delete( line);
 	}
 
 	/**
@@ -125,7 +127,7 @@ public class TestDelete {
 	public void testDelete_NegativeInvalidCredit() throws DataFormatException {
 		System.out.println("DeleteTest 8: Tests constructor's ability to catch and reject credit amount values less than zero or have invalid (i.e.minus,-) characters...");
 		String line = "manager         AA -99.99";
-		Delete TestDelete = new Delete( line);
+		Delete test = new Delete( line);
 	}
 
 	/**
@@ -137,7 +139,7 @@ public class TestDelete {
 	public void testDelete_CreditTooLarge() throws DataFormatException {
 		System.out.println("DeleteTest 9: Tests constructor's ability to catch credit amount values that are exceed the maximum size limit...");
 		String line = "manager         AA 9999999.99";
-		Delete TestDelete = new Delete( line);
+		Delete test = new Delete( line);
 	}
 
 	/**
@@ -155,9 +157,9 @@ public class TestDelete {
 		TestAccounts.add(new Account( "user123", Account.Sell, 500));
 				
 		System.out.println("DeleteTest 10: Test applyTo(), test if a Delete transaction is applied correctly to delete specified user account...");
-		Delete TestDelete = new Delete("user123         SS 000500.00");
+		Delete test = new Delete("user123         SS 000500.00");
 		//TestAccounts contains account with matching username, hence 'user123' account is deleted after Delete transaction is applied
-		TestDelete.applyTo(TestAccounts, TestTickets);
+		test.applyTo(TestAccounts, TestTickets);
 	}
 
 	/**
@@ -172,8 +174,8 @@ public class TestDelete {
 		Vector<Ticket> TestTickets = new Vector<Ticket>();
 
 		System.out.println("DeleteTest 11: Test the applyTo() method, test the delete transaction to delete a specified user account when the username and account do not exist (not found) in the accounts vector");
-		Delete TestDelete = new Delete("newuser         SS 000500.00");
+		Delete test = new Delete("newuser         SS 000500.00");
 		//TestAccounts will be empty, thus 'newuser' does not exist
-		TestDelete.applyTo(TestAccounts, TestTickets);
+		test.applyTo(TestAccounts, TestTickets);
 	}
 }
