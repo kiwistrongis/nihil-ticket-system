@@ -82,7 +82,7 @@ public class Buy extends Transaction {
 
 				//This ticket (ticket i) has enought of the desired tickets
 				//Update vector, removing purchased tickets
-				tickets.get(MaxTickets_TicketIndex).quantity -= this.numTickets; 
+				tickets.get(i).quantity -= this.numTickets; 
 				return;
 			}
 		
