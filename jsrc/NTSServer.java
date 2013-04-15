@@ -184,7 +184,7 @@ public class NTSServer {
 							break;
 						//read the rest line as a Buy Transaction
 						case transaction.Buy.code:
-							transactions.add( new transaction.Buy(
+							transactions.add( new jsrc.Buy(
 								lineParser.nextLine().substring(1)));
 							break;
 						//read the rest line as a Create Transaction
@@ -204,7 +204,7 @@ public class NTSServer {
 							break;
 						//read the rest line as a Sell Transaction
 						case transaction.Sell.code:
-							transactions.add( new transaction.Sell(
+							transactions.add( new jsrc.Sell(
 								lineParser.nextLine().substring(1)));
 							break;
 						//check for invalid code characters

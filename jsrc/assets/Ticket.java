@@ -1,4 +1,4 @@
-package assets;
+package jsrc;
 
 //library imports
 import java.util.zip.DataFormatException;
