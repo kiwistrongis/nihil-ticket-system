@@ -15,18 +15,16 @@ import org.junit.runners.JUnit4;
 @RunWith(JUnit4.class)
 public class TestTicket {
 
-	//BEING WORKED ON BY WES, STILL HAVE MANY TESTS TO ADD HERE
-
 	//Test 1: Valid construction of a ticket object, given a correctly formatted ATF File Line
 	@Test
-	public void testTicket_Valid() throws DataFormatException
+	public void testTicket() throws DataFormatException
 	{
 		Ticket t = new Ticket("EventName1222223333 Username1122222 100 102.49");
 	}
 
 	//Test 2: Tests for failure of ticket creation due to incorrect ATF File Line size
 	@Test(expected = DataFormatException.class)
-	public void testTicket_InvalidLineLength() throws DataFormatException
+	public void testTicket_InvalidLine() throws DataFormatException
 	{
 		Ticket t = new Ticket("IncorrectLengthOfThisLIne");
 	}
@@ -51,13 +49,21 @@ public class TestTicket {
 
 	//Test 5: Tests equals method, to check if two ticket objects have the same eventname and seller
 	@Test
-	public void testEquals() {
+	public void testEquals_Equal() {
 		Ticket t1 = new Ticket("GrandEvent", "Seller1", 100, 1000);
 		Ticket t2 = new Ticket("GrandEvent", "Seller1", 101,  999);
 		
 		assertTrue( t1.equals( t2 ) );
 	}
-	
+
+	//Test 6: Tests equals method, to check if two ticket objects that are different will result in false.
+	@Test
+	public void testEquals_NotEqual() {
+		Ticket t1 = new Ticket("GrandEvent", "Seller1", 100, 1000);
+		Ticket t2 = new Ticket("AnotherEvent", "Seller1", 101,  999);
+		
+		assertTrue( !t1.equals( t2 ) );
+	}	
 
 }
 

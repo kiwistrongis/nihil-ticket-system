@@ -89,7 +89,7 @@ public class Buy extends Transaction {
 		//Update vector removing purchased tickets
 		tickets.get(MaxTickets_TicketIndex).quantity -= this.numTickets;
 
-		//Important Note: the user's credit will be dedcucted by the immediately following refund transaction
+		//Important Note: the user's credit will be deducted by the immediately following refund transaction
 	}
 
 
