@@ -20,7 +20,7 @@ public class AddCredit extends Transaction{
 		//extract
 		this.username = line.substring( i, Account.username_size).trim();
 		//validate
-		if( ! this.username.matches(""))
+		if( ! this.username.matches("[A-Za-z0-9_]+"))
 			throw new DataFormatException("Invalid username field");
 		//increment i
 		i += Account.username_size + Account.token_size;
@@ -38,6 +38,7 @@ public class AddCredit extends Transaction{
 		//validate
 		else
 			throw new DataFormatException("Invalid type field");
+		i += Account.type_size + Account.token_size;
 
 		//extract dollars
 		String dollars = line.substring( i, i + Account.dollars_size);

@@ -23,15 +23,16 @@ public class Refund extends Transaction {
 		//extract
 		this.buyer_name = line.substring( i, Account.username_size).trim();
 		//validate
-		if( ! this.buyer_name.matches(""))
+		if( ! this.buyer_name.matches("[A-Za-z0-9_]+"))
 			throw new DataFormatException("Invalid buyer username field");
 		//increment i
 		i += Account.username_size + Account.token_size;
 		
 		//extract
-		this.seller_name = line.substring( i, Account.username_size).trim();
+		this.seller_name = line.substring(
+			i, i + Account.username_size).trim();
 		//validate
-		if( ! this.seller_name.matches(""))
+		if( ! this.seller_name.matches("[A-Za-z0-9_]+"))
 			throw new DataFormatException("Invalid seller username field");
 		//increment i
 		i += Account.username_size + Account.token_size;
@@ -41,6 +42,7 @@ public class Refund extends Transaction {
 		i += Account.dollars_size + 1;
 		//extract cents
 		String cents = line.substring( i, i + Account.cents_size);
+		System.out.printf("%s,%s}\n",dollars,cents);
 		try{
 			this.amount =
 				Integer.parseInt( dollars)*100 +

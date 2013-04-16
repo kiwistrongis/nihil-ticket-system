@@ -13,6 +13,41 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(JUnit4.class)
 public class TestRefund{
+	public static void main(String[] args){
+		TestRefund test = new TestRefund();
+		try{
+			test.testRefundConstruct_Valid();}
+		catch( DataFormatException e){
+			e.printStackTrace();}
+		try{
+			test.testRefundConstruct_InvalidBuyerUseName();}
+		catch( DataFormatException e){
+			e.printStackTrace();}
+		try{
+			test.testRefundConstruct_InvalidSellerUseName();}
+		catch( DataFormatException e){
+			e.printStackTrace();}
+		try{
+			test.testRefundConstruct_InvalidCreditValue();}
+		catch( DataFormatException e){
+			e.printStackTrace();}
+		try{
+			test.testRefundConstruct_InvalidCreditAmounnt();}
+		catch( DataFormatException e){
+			e.printStackTrace();}
+		try{
+			test.testRefundConstruct_InvalidStringLength();}
+		catch( DataFormatException e){
+			e.printStackTrace();}
+		try{
+			test.testRefundConstruct_ZeroValue();}
+		catch( DataFormatException e){
+			e.printStackTrace();}
+		try{
+			test.testRefundConstruct_DecimalInserted();}
+		catch( DataFormatException e){
+			e.printStackTrace();}
+	}
 
 	//Tests constructors ability to identify a valid input
 	@Test
@@ -20,34 +55,34 @@ public class TestRefund{
 		Refund TestRefund = new Refund("UserName1122222 UserName3344444 000100.00");
 	}
 	//Test constructors ability to indentify an invalid buyer usename
-	@Test
+	@Test (expected = DataFormatException.class)
 	public void testRefundConstruct_InvalidBuyerUseName() throws DataFormatException{
 		Refund TestRefund = new Refund("UserNa&e1122222 UserName3344444 000100.00");
 	}
 	//Test constructors ability to indentify an invalid usename
-	@Test
+	@Test (expected = DataFormatException.class)
 	public void testRefundConstruct_InvalidSellerUseName() throws DataFormatException{
 		Refund TestRefund = new Refund("UserName1122222 UserN#me3344444 000100.00");
 	}
 	//Tests constructors ability to catch an invalid credit value
-	@Test
+	@Test (expected = DataFormatException.class)
 	public void testRefundConstruct_InvalidCreditValue() throws DataFormatException{
 		Refund TestRefund = new Refund("UserName1122222 UserName3344444 0001k0.00");
 	}
 	//Tests constructors ability to prevent overcrediting per session
-	@Test
+	@Test (expected = DataFormatException.class)
 	public void testRefundConstruct_InvalidCreditAmounnt() throws DataFormatException{
-		Refund TestRefund = new Refund("UserName1122222 UserName3344444 010000.00");
+		Refund TestRefund = new Refund("UserName1122222 UserName3344444 .........");
 	}
 	//Tests constructors ability to reject incorrect string formats
-	@Test
+	@Test (expected = DataFormatException.class)
 	public void testRefundConstruct_InvalidStringLength() throws DataFormatException{
 		Refund TestRefund = new Refund("UserName11222227 UserName33444445 000100.000");
 	}
 	//Tests constructors ability to reject zero addition
 	@Test
 	public void testRefundConstruct_ZeroValue() throws DataFormatException{
-		Refund TestRefund = new Refund("UserName11222227 UserName3344444 000000.00");
+		Refund TestRefund = new Refund("UserName1122222 UserName3344444 000000.00");
 	}
 	//Tests constructors ability to catch decimal values
 	@Test
