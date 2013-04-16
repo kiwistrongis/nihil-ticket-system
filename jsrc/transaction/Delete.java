@@ -28,9 +28,7 @@ public class Delete extends Transaction {
 		//extract
 		this.username = line.substring( i, Account.username_size).trim();
 		//validate
-		if( ! this.username.matches(""))
-			throw new DataFormatException("Invalid username field");
-		if( this.username.matches("([A-Za-z0-9 ]+)")==false)
+		if( ! this.username.matches("[A-Za-z0-9_]+"))
 			throw new DataFormatException("Invalid username field");
 		if (this.username.trim().length() <= 0)
 			throw new DataFormatException("Username field too small");

@@ -128,6 +128,8 @@ bin/tests/TestTicket.class: jsrc/tests/TestTicket.java \
 
 server-test-addcredit: bin/tests/TestAddCredit.class
 	-java $(cp) org.junit.runner.JUnitCore tests.TestAddCredit
+server-test-addcredit2: bin/tests/TestAddCredit.class
+	java $(cp) tests.TestAddCredit
 bin/tests/TestAddCredit.class: jsrc/tests/TestAddCredit.java \
 		bin/transaction/AddCredit.class
 	javac $(cp) $(dest) jsrc/tests/TestAddCredit.java
@@ -148,12 +150,16 @@ bin/tests/TestCreate.class: jsrc/tests/TestCreate.java \
 
 server-test-delete: bin/tests/TestDelete.class
 	-java $(cp) org.junit.runner.JUnitCore tests.TestDelete
+server-test-delete2: bin/tests/TestDelete.class
+	java $(cp) tests.TestDelete
 bin/tests/TestDelete.class: jsrc/tests/TestDelete.java \
 		bin/transaction/Delete.class
 	javac $(cp) $(dest) jsrc/tests/TestDelete.java
 
 server-test-refund: bin/tests/TestRefund.class
 	-java $(cp) org.junit.runner.JUnitCore tests.TestRefund
+server-test-refund2: bin/tests/TestRefund.class
+	java $(cp) tests.TestRefund
 bin/tests/TestRefund.class: jsrc/tests/TestRefund.java \
 		bin/transaction/Refund.class
 	javac $(cp) $(dest) jsrc/tests/TestRefund.java

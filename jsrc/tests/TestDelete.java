@@ -20,6 +20,8 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(JUnit4.class)
 public class TestDelete {
+	public static void main(String[] args){
+	}
 
 	@BeforeClass
 	public static void testSetup() {
@@ -126,7 +128,7 @@ public class TestDelete {
 	@Test (expected = DataFormatException.class)
 	public void testDelete_NegativeInvalidCredit() throws DataFormatException {
 		System.out.println("DeleteTest 8: Tests constructor's ability to catch and reject credit amount values less than zero or have invalid (i.e.minus,-) characters...");
-		String line = "manager         AA -99.99";
+		String line = "manager         AA -00099.99";
 		Delete test = new Delete( line);
 	}
 
